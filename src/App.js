@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Person from './Person/Person';
-import './App.css';
+import classes from './App.css';
 
 
 
@@ -33,20 +33,9 @@ class App extends Component {
 
 
   render() {
-    const style = {
-      backgroundColor: 'green',
-      color: '#000',
-      font: 'inherit',
-      border: '1px solid blue',
-      padding: '8px',
-      cursor: 'pointer',
-      ':hover': {
-        background: 'lightgreen',
-        color:'black'
-      }
-    };
 
-    let persons = null;
+  let persons = null;
+  let btnClass= '';
 
     if( this.state.showPersons ) {
       persons =(
@@ -63,7 +52,7 @@ class App extends Component {
           }
       </div>
       );
-      
+      btnClass = classes.Red;
       style.backgroundColor = 'red';
     }
 
@@ -79,7 +68,7 @@ class App extends Component {
    
       <div className="App App-header">
         <h1> Hi, I'm a React App</h1>
-        <p className={classes.join(' ')}>This is really working!</p>
+        <p className={btnClass}>This is really working!</p>
           <button onClick = { this.togglePersonsHandler} style={style} >Toggle Persons</button>
           {persons}
         
@@ -89,4 +78,4 @@ class App extends Component {
   }
 }
 
-export App;
+export default    App;
