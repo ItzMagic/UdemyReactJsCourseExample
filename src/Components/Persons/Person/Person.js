@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import classes from './Person.css';
 import withClass from '../../../hoc/withClass';
 import Aux from '../../../hoc/Aux';
-
+import { AuthContext } from '../../../containers/App';
 class Person extends Component {
     constructor( props ) {
         super( props );
@@ -18,8 +18,8 @@ class Person extends Component {
 
     componentDidMount () {
         console.log( '[Person.js] Inside componentDidMount()' );
-        // this.inputElement.focus();
     }
+    
     focus() {
             this.inputElement.current.focus();
     }
@@ -28,11 +28,14 @@ class Person extends Component {
     render () {
         console.log( '[Person.js] Inside render()' );
         return (
-            <Aux className={classes.Person}>
+            <Aux>
+                <AuthContext.Consumer>
+                    {auth => auth ? <p>I'm authenticated!</p> : null}
+                </AuthContext.Consumer>
                 <p onClick={this.props.click}>I'm {this.props.name} and I am {this.props.age} years old!</p>
                 <p>{this.props.children}</p>
                 <input 
-                    ref={(inp)=> { this.inputElement = inp }}
+                    ref={this.inputElement}
                     type="text" 
                     onChange={this.props.changed} 
                     value={this.props.name} />
@@ -49,4 +52,4 @@ Person.propsTypes = {
 };
 
 
-export default withClass(Person, classes.Person);
+export default withClass( Person, classes.Person );

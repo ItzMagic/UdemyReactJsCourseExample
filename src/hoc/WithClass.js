@@ -1,27 +1,29 @@
-import React from 'react';
+import React, { Component }from 'react';
 
-const withClass= (WrappedComponent, className) => {
-    const WithClass = class extends Component 
-        return () (props) => (
-            <div className={className}>
-            <WrappedComponent {...props} />
-    }        </div>
-    )
- }
+// import React from 'react';
+// const withClass = (WrappedComponent, className) =>{
+//     return (props) => (
+//         <div className={className}>
+//             <WrappedComponent {...props} />
+//         </div>
+//     )
+// }
 
-/*
-HOC RETURNING STATEFUL COMPONENT
-----------------------------------------------------------------
+
+// Below is a function that returns a class on demand and the class name doesn't matter.
 const withClass = (WrappedComponent, className) => {
-    return class extends Component {
-        render() {
-            return (
+    const WithClass = class extends Component {
+        render(){
+            return(
                 <div className={className}>
-                    <WrappedComponent {...this.props} />
-                <div>
-            )
-        }
-    }
+                    <WrappedComponent ref={this.props.forwardedREf} {...this.props} />
+                </div>
+           )
+        }   
+    }    
+    return React.forwardRef(( props , ref )=> {
+        return <WithClass {...props} forwardedREf ={ref} />;
+    } );
 }
-*/
- export default withClass;
+
+export default withClass; 
